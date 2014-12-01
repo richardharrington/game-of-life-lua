@@ -22,7 +22,7 @@ function setUnion(set1, set2)
   return union
 end
 
-local function serializeCoordPair(x,y) 
+local function serializeCoordPair(x,y)
   return tostring(x) .. "," .. tostring(y)
 end
 
@@ -34,7 +34,7 @@ end
 local function areNeighbors(coordPair1, coordPair2)
   local x1, y1 = unpack(coordPair1)
   local x2, y2 = unpack(coordPair2)
-  return (not (x1 == x2 and y1 == y2)) and 
+  return (not (x1 == x2 and y1 == y2)) and
          (math.abs(x1 - x2) < 2 and math.abs(y1 - y2) < 2)
 end
 
@@ -65,7 +65,7 @@ local function deadCoordPairsNearLiveOnes(coordPairs)
   return deadCoordPairs
 end
 
-function willBeAlive(coordPair, liveCoordPairs) 
+function willBeAlive(coordPair, liveCoordPairs)
   local c = count(liveNeighbors(coordPair, liveCoordPairs))
   if liveCoordPairs[coordPair] then
     return c > 1 and c < 4
@@ -74,7 +74,7 @@ function willBeAlive(coordPair, liveCoordPairs)
   end
 end
 
-function nextLiveCoordPairs(liveCoordPairs) 
+function nextLiveCoordPairs(liveCoordPairs)
   local deadCoordPairs = deadCoordPairsNearLiveOnes(liveCoordPairs)
   local allCoordPairs = setUnion(liveCoordPairs, deadCoordPairs)
 
