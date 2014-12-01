@@ -1,4 +1,4 @@
 game-of-life-lua
 ================
 
-Game of Life in Lua, with spec
+Game of Life in Lua, with Busted spec
