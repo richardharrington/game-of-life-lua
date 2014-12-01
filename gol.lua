@@ -34,7 +34,7 @@ end
 local function areNeighbors(coordPair1, coordPair2)
   local x1, y1 = unpack(coordPair1)
   local x2, y2 = unpack(coordPair2)
-  return (not (x1 == x2 and y1 == y2)) and
+  return (x1 ~= x2 or y1 ~= y2) and
          (math.abs(x1 - x2) < 2 and math.abs(y1 - y2) < 2)
 end
 
