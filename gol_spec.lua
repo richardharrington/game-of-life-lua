@@ -146,39 +146,5 @@ describe('game of life', function()
 
       assert.are.same(nextLiveCoordPairs, expectedNextLiveCoordPairs)
     end)
-
   end)
-
 end)
-
-
--- describe('Busted unit testing framework', function()
---   describe('should be awesome', function()
---     it('should be easy to use', function()
---       assert.truthy("Yup.")
---     end)
-
---     it('should have lots of features', function()
---       assert.are.same({ table = 'great' }, { table = 'great' })
---       assert.are_not.equal({ table = 'great' }, { table = 'great' })
---       assert.truthy('this is a string')
-
---       assert.True(1 == 1)
---       assert.is_true(1 == 1)
-
---       assert.falsy(nil)
---       assert.falsy(false)
---       assert.is_nil(nil)
-
---       assert.has_error(function() error("Wat") end, "Wat")
---     end)
-
---     it('should have mocks and spies for functional tests', function()
---       spy.on(gol, "greet")
---       gol.greet("Hi!")
-
---       assert.spy(gol.greet).was.called()
---       assert.spy(gol.greet).was.called_with("Hi!")
---     end)
---   end)
--- end)
