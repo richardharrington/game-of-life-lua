@@ -26,13 +26,7 @@ describe('game of life', function()
 
       local neighbors = gol.liveNeighbors(coordPair, coordPairs)
 
-      assert.is_true(neighbors["2,3"])
-      assert.is_true(neighbors["4,4"])
-
-      assert.is_nil(neighbors["1,1"])
-      assert.is_nil(neighbors["3,3"])
-      assert.is_nil(neighbors["1,5"])
-
+      assert.are.same(neighbors, { ["2,3"] = true, ["4,4"] = true })
     end)
 
     it('gets set of dead cells adjacent to live cells', function()
@@ -55,7 +49,6 @@ describe('game of life', function()
         ["3,3"] = true
       })
     end)
-
   end)
 
   describe('living and dying', function()
