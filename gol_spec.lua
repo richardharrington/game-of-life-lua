@@ -1,5 +1,13 @@
 local gol = require('gol')
 
+function buildSet(items)
+  local set = {}
+  for _, item in ipairs(items) do
+    set[item] = true
+  end
+  return set
+end
+
 describe('game of life', function()
   describe('coordinates', function()
 
@@ -15,13 +23,7 @@ describe('game of life', function()
     end)
 
     it('determines live neighbors from coord pair set', function()
-      local coordPairs = {
-        ["1,1"] = true, 
-        ["2,3"] = true,
-        ["3,3"] = true,
-        ["4,4"] = true,
-        ["1,5"] = true
-      }
+      local coordPairs = buildSet {"1,1", "2,3", "3,3", "4,4", "1,5"}
       local coordPair = "3,3"
 
       local neighbors = gol.liveNeighbors(coordPair, coordPairs)
@@ -31,23 +33,12 @@ describe('game of life', function()
 
     it('gets set of dead cells adjacent to live cells', function()
       local liveCells = { ["1,1"] = true, ["2,2"] = true }
+      local expectedDeadCells = buildSet {"0,0", "1,0", "2,0", "0,1", "2,1", "3,1",
+                                          "0,2", "1,2", "3,2", "1,3", "2,3", "3,3"}
 
       deadCells = gol.deadCoordPairsNearLiveOnes(liveCells)
 
-      assert.are.same(deadCells, {
-        ["0,0"] = true,
-        ["1,0"] = true,
-        ["2,0"] = true,
-        ["0,1"] = true,
-        ["2,1"] = true,
-        ["3,1"] = true,
-        ["0,2"] = true,
-        ["1,2"] = true,
-        ["3,2"] = true,
-        ["1,3"] = true,
-        ["2,3"] = true,
-        ["3,3"] = true
-      })
+      assert.are.same(deadCells, expectedDeadCells)
     end)
   end)
 
@@ -56,17 +47,8 @@ describe('game of life', function()
     local liveCoordPairs
 
     before_each(function()
-      liveCoordPairs = {
-        ["1,1"] = true, 
-        ["2,1"] = true, 
-        ["1,2"] = true, 
-        ["2,2"] = true, 
-        ["2,3"] = true, 
-        ["3,3"] = true, 
-        ["4,3"] = true, 
-        ["5,3"] = true, 
-        ["2,4"] = true
-      }
+      liveCoordPairs = buildSet {"1,1", "2,1", "1,2", "2,2", "2,3",
+                                 "3,3", "4,3", "5,3", "2,4"}
     end)
 
     it('cell stays alive with two neighbors', function()
@@ -126,14 +108,8 @@ describe('game of life', function()
     end)
 
     it('iterates properly from one set of live cells to the next', function()
-      local expectedNextLiveCoordPairs = {
-        ["1,1"] = true,
-        ["2,1"] = true,
-        ["4,2"] = true,
-        ["4,3"] = true,
-        ["2,4"] = true,
-        ["4,4"] = true
-      }
+      local expectedNextLiveCoordPairs = buildSet { "1,1", "2,1", "4,2",
+                                                    "4,3", "2,4", "4,4" }
 
       nextLiveCoordPairs = gol.nextLiveCoordPairs(liveCoordPairs)
 
