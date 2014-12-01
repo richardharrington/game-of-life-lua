@@ -27,7 +27,7 @@ local function serializeCoordPair(x,y)
 end
 
 local function deserializeCoordPair(s)
-  x, y = s:match(coordPattern)
+  local x, y = s:match(coordPattern)
   return { tonumber(x), tonumber(y) }
 end
 
@@ -52,9 +52,7 @@ end
 local function deadCoordPairsNearLiveOnes(coordPairs)
   local deadCoordPairs = {}
   for coordPair in pairs(coordPairs) do
-    numCoordPair = deserializeCoordPair(coordPair)
-    x = numCoordPair[1]
-    y = numCoordPair[2]
+    local x, y = unpack(deserializeCoordPair(coordPair))
     for i = x - 1, x + 1 do
       for j = y - 1, y + 1 do
         local cp = serializeCoordPair(i, j)
@@ -68,7 +66,7 @@ local function deadCoordPairsNearLiveOnes(coordPairs)
 end
 
 function willBeAlive(coordPair, liveCoordPairs) 
-  c = count(liveNeighbors(coordPair, liveCoordPairs))
+  local c = count(liveNeighbors(coordPair, liveCoordPairs))
   if liveCoordPairs[coordPair] then
     return c > 1 and c < 4
   else
